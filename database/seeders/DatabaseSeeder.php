@@ -19,19 +19,19 @@ class DatabaseSeeder extends Seeder
              'name' => 'camarero',
              'email' => 'camarero@rest.com',
              'password'=>Hash::make('12345678'),
-             'tipo'=> 0
+             'role'=> 'camarero'
          ]);
          \App\Models\User::factory()->create([
             'name' => 'cocinero',
             'email' => 'cocinero@rest.com',
             'password'=>Hash::make('12345678'),
-            'tipo'=> 1
+            'role'=> 'cocinero'
         ]);
         \App\Models\User::factory()->create([
             'name' => 'administrador',
             'email' => 'admin@rest.com',
             'password'=>Hash::make('12345678'),
-            'tipo'=> 2
+            'role'=> 'admin'
         ]);
     }
 }

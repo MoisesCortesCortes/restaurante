@@ -13,17 +13,10 @@ class AdminController extends Controller
 
     public function index()
     {
-        $user=Auth::user();
-        if($user->tipo==0){
-            return view('app.nopermiso', ['seccion' => 'Administrador','rol'=>'Camarero']);
-        }elseif($user->tipo==1){
-            return view('app.nopermiso', ['seccion' => 'Administrador','rol'=>'Cocinero']);
-        }if($user->tipo==2){
+        
             $platos = Plato::all();
             return view('app.admin', ['platos' => $platos]);
-        }else{
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
+        
         
     }
 

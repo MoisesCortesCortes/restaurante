@@ -16,7 +16,7 @@ class CamareroController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->tipo == 0) {
+        // if ($user->tipo == 0) {
             $platos = Plato::all();
             $queryPedidos = 'SELECT * FROM pedidos WHERE pagado=false';
             $pedidos = DB::select($queryPedidos);
@@ -45,14 +45,14 @@ class CamareroController extends Controller
                 'lineas' => $lineas,
                 'todoServido' => $todoServido
             ]);
-        } elseif ($user->tipo == 1) {
-            return view('app.nopermiso', ['seccion' => 'Camarero', 'rol' => 'Cocinero']);
-        }
-        if ($user->tipo == 2) {
-            return view('app.nopermiso', ['seccion' => 'Camarero', 'rol' => 'Administrador']);
-        } else {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
+        // } elseif ($user->tipo == 1) {
+        //     return view('app.nopermiso', ['seccion' => 'Camarero', 'rol' => 'Cocinero']);
+        // }
+        // if ($user->tipo == 2) {
+        //     return view('app.nopermiso', ['seccion' => 'Camarero', 'rol' => 'Administrador']);
+        // } else {
+        //     return redirect()->intended(RouteServiceProvider::HOME);
+        // }
     }
 
     public function newComanda(Request $request)

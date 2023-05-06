@@ -12,9 +12,9 @@ class CocinaController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        if ($user->tipo == 0) {
-            return view('app.nopermiso', ['seccion' => 'Cocina', 'rol' => 'Camarero']);
-        } elseif ($user->tipo == 1) {
+        // if ($user->tipo == 0) {
+        //     return view('app.nopermiso', ['seccion' => 'Cocina', 'rol' => 'Camarero']);
+        // } elseif ($user->tipo == 1) {
             $queryPedidos='SELECT * FROM pedidos WHERE pagado=false';
         $pedidos=DB::select($queryPedidos);
         $comandas=null;
@@ -35,12 +35,12 @@ class CocinaController extends Controller
         'pedidos'=>$pedidos,
         'comandas'=>$comandas,
         'lineas'=>$lineas]);
-        }
-        if ($user->tipo == 2) {
-            return view('app.nopermiso', ['seccion' => 'Cocina', 'rol' => 'Administrador']);
-        } else {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
+        // }
+        // if ($user->tipo == 2) {
+        //     return view('app.nopermiso', ['seccion' => 'Cocina', 'rol' => 'Administrador']);
+        // } else {
+        //     return redirect()->intended(RouteServiceProvider::HOME);
+        // }
 
         
     }
