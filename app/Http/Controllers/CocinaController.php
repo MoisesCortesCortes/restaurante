@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comanda;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CocinaController extends Controller
 {
     public function index(){
-
-        $queryPedidos='SELECT * FROM pedidos WHERE pagado=false';
+        $user = Auth::user();
+        if ($user->tipo == 0) {
+            return view('app.nopermiso', ['seccion' => 'Cocina', 'rol' => 'Camarero']);
+        } elseif ($user->tipo == 1) {
+            $queryPedidos='SELECT * FROM pedidos WHERE pagado=false';
         $pedidos=DB::select($queryPedidos);
         $comandas=null;
         $lineas=null;
@@ -30,6 +35,14 @@ class CocinaController extends Controller
         'pedidos'=>$pedidos,
         'comandas'=>$comandas,
         'lineas'=>$lineas]);
+        }
+        if ($user->tipo == 2) {
+            return view('app.nopermiso', ['seccion' => 'Cocina', 'rol' => 'Administrador']);
+        } else {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        
     }
 
     public function listo($id){

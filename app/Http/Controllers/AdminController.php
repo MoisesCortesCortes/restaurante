@@ -3,16 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plato;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
 
     public function index()
     {
-        $platos = Plato::all();
-        return view('app.admin', ['platos' => $platos]);
+        $user=Auth::user();
+        if($user->tipo==0){
+            return view('app.nopermiso', ['seccion' => 'Administrador','rol'=>'Camarero']);
+        }elseif($user->tipo==1){
+            return view('app.nopermiso', ['seccion' => 'Administrador','rol'=>'Cocinero']);
+        }if($user->tipo==2){
+            $platos = Plato::all();
+            return view('app.admin', ['platos' => $platos]);
+        }else{
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+        
     }
 
     public function addPlato(Request $request)

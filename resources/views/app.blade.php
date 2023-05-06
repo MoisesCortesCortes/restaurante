@@ -28,6 +28,13 @@
         <li class="nav-item">
           <a class="nav-link " aria-current="page" href="{{ route('admin') }}">Administración</a>
         </li>
+        <li class="nav-item">
+        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                this.closest('form').submit();">Cerrar sesion</a>
+                        </form>
+        </li>
         
       </ul>
 
